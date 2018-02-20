@@ -1,6 +1,4 @@
 # colatte
-Basic ethereum dev framework; Work from udemy course http://bit.ly/2GuJj9r
-
 ---
 This is a basic environment to test smart contracts and deploy them to a test (Rinkeby) ethereum network.
 ---
