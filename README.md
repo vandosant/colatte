@@ -6,7 +6,7 @@ This is a basic environment to test smart contracts and deploy them to a test (R
 Add a `secrets.json` at the root director with the format:
 ```
 {
-  "MNEMONIC": "blah blah blah blah blah blah blah blah blah blah blah blah", // secret phrase from a https://metamask.io account
+  "MNEMONIC": "blah x 12", // your secret phrase from a test https://metamask.io account
   "PROVIDER_URL": "YOUR_INFURA_URL_GOES_HERE" // get yours at https://infura.io
 }
 ```
