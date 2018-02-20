@@ -1,5 +1,4 @@
 # colatte
----
 This is a basic environment to test smart contracts and deploy them to a test (Rinkeby) ethereum network.
 ---
 
