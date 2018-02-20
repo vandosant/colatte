@@ -3,7 +3,7 @@ This is a basic environment to test smart contracts and deploy them to a test (R
 ---
 
 # setup
-Add a `secrets.json` at the root director with the format:
+Add a `secrets.json` at the root directory with the format:
 ```
 {
   "MNEMONIC": "blah x 12", // your secret phrase from a test https://metamask.io account
@@ -11,5 +11,9 @@ Add a `secrets.json` at the root director with the format:
 }
 ```
 
-Then, you can deploy to your provider url:
+Then, you can deploy the test contract to your provider url:
 `node deploy.js`
+
+To interact with it on the network, enter your deployed address key on https://remix.ethereum.org
+- Go to the `Run` tab
+- Enter your address into the `At Address` input field
