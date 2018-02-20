@@ -10,11 +10,18 @@ const deploy = async () => {
   const accounts = await web3.eth.getAccounts()
   console.log('ATTEMPTING DEPLOY FROM ACCOUNT: ', accounts[0])
 
+  _log()
+  const timeout = setInterval(_log, 1000)
+
   const instance = await new web3.eth.Contract(JSON.parse(interface))
     .deploy({ data: bytecode, arguments: [ 'Hello Rinkeby!' ] })
     .send({ from: accounts[0], gas: '1000000' })
 
+  clearInterval(timeout)
+  process.stdout.write('\n')
   instance.setProvider(provider)
   console.log('DEPLOYED TO ADDRESS: ', instance.options.address)
 }
 deploy()
+
+const _log = () => process.stdout.write(['\033[', 36, 'm', '.', '\033[0m'].join(''))
