@@ -5,15 +5,15 @@ const provider = ganache.provider()
 const web3 = new Web3(provider)
 const { interface, bytecode } = require('../compile')
 
-let accounts
+let account
 let instance
 
 beforeEach(async function () {
-  accounts = await web3.eth.getAccounts()
+  [ account, ] = await web3.eth.getAccounts()
 
   instance = await new web3.eth.Contract(JSON.parse(interface))
     .deploy({ data: bytecode, arguments: [ 'Hello Ethereum' ] })
-    .send({ from: accounts[0], gas: '1000000' })
+    .send({ from: account, gas: '1000000' })
 
   instance.setProvider(provider)
 })
@@ -23,8 +23,14 @@ describe('Colatte', function () {
     assert.ok(instance.options.address)
   })
 
-  it('initializes with initialMessage', async function () {
+  it('initializes with initial message', async function () {
     const message = await instance.methods.message().call()
     assert.equal(message, 'Hello Ethereum')
+  })
+
+  it('updates the message', async function () {
+    await instance.methods.setMessage('Hello New Message').send({ from : account })
+    const message = await instance.methods.message().call()
+    assert.equal(message, 'Hello New Message')
   })
 })
