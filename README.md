@@ -17,3 +17,9 @@ Then, you can deploy the test contract to your provider url:
 To interact with it on the network, enter your deployed address key on https://remix.ethereum.org
 - Go to the `Run` tab
 - Enter your address into the `At Address` input field
+
+# tools
+- Web3: js lib to interact with the ethereum network
+- Ganache: local-hosted test network; reduces testing latency
+- Solc: compiles solidity smart-contracts to bytecode
+- truffle-hdwallet-provider: takes a metamask mnemonic
