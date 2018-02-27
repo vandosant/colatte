@@ -29,7 +29,7 @@ describe('Colatte', function () {
   })
 
   it('updates the message', async function () {
-    await instance.methods.setMessage('Hello New Message').send({ from : account })
+    await instance.methods.setMessage('Hello New Message').send({ from: account })
     const message = await instance.methods.message().call()
     assert.equal(message, 'Hello New Message')
   })
