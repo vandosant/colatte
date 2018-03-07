@@ -80,7 +80,7 @@ describe('Lottery', () => {
     }
   })
 
-  it('only allows manager to pick winner', async () => {
+  it('only manager can pick winner', async () => {
     try {
       await instance.methods.pickWinner().send({
         from: accounts[1]
@@ -89,6 +89,34 @@ describe('Lottery', () => {
     } catch (err) {
       assert(err)
     }
+  })
+
+  it('sends reward to the winner and resets the players', async () => {
+    await instance.methods.enter().send({
+      from: accounts[0],
+      value: web3.utils.toWei('0.01', 'ether')
+    })
+
+    const initialBalance = await web3.eth.getBalance(accounts[0])
+
+    await instance.methods.pickWinner().send({
+      from: accounts[0]
+    })
+
+    const finalBalance = await web3.eth.getBalance(accounts[0])
+    const difference = finalBalance - initialBalance
+    assert(difference > web3.utils.toWei('0.009', 'ether'))
+
+    const players = await instance.methods.getPlayers().call({
+      from: accounts[0]
+    })
+
+    assert.equal(0, players.length)
+
+    const address = instance.options.address
+    const contractBalance = await web3.eth.getBalance(address)
+
+    assert.equal(0, contractBalance)
   })
 })
 
