@@ -55,4 +55,36 @@ describe('Campaigns', () => {
   it('deploys a campaign', () => {
     assert.ok(campaign.options.address)
   })
+
+  it('sets creator as campaign manager', async () => {
+    const manager = await campaign.methods.manager().call()
+    assert.equal(accounts[0], manager)
+  })
+
+  it('allows contributions and marks them as approvers', async () => {
+    const contributor = accounts[1]
+
+    const isApproverBefore = await campaign.methods.approvers(contributor).call()
+    assert(!isApproverBefore)
+
+    await campaign.methods.contribute().send({
+      from: contributor,
+      value: '200'
+    })
+
+    const isApproverAfter = await campaign.methods.approvers(contributor).call()
+    assert(isApproverAfter)
+  })
+
+  it('requires a minimum contribution', async () => {
+    try {
+      await campaign.methods.contribute().send({
+        from: accounts[1],
+        value: '100'
+      })
+      assert(false)
+    } catch(err) {
+      assert(err)
+    }
+  })
 })
