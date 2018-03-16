@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Card } from 'semantic-ui-react'
+import { Button, Card } from 'semantic-ui-react'
+import Layout from '../components/Layout'
 import factory from '../ethereum/factory'
 
 export default class Index extends Component {
@@ -17,10 +18,10 @@ export default class Index extends Component {
       description: <a>View Campaign</a>,
       fluid: true
     }))
-    return (<div>
+    return (<Layout>
       <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
       <Card.Group items={items} />
-      </div>
-    )
+      <Button icon='plus' content='Create Campaign' />
+    </Layout>)
   }
 }
