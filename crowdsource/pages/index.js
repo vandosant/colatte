@@ -19,9 +19,8 @@ export default class Index extends Component {
       fluid: true
     }))
     return (<Layout>
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
+      <Button icon='plus circle' content='Create Campaign' primary floated='right' />
       <Card.Group items={items} />
-      <Button icon='plus' content='Create Campaign' />
     </Layout>)
   }
 }
