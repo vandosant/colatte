@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "next dev",
     "test": "mocha"
   },
   "author": "",
