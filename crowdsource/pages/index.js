@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Card } from 'semantic-ui-react'
 import Layout from '../components/Layout'
+import { Link } from '../routes'
 import factory from '../ethereum/factory'
 
 export default class Index extends Component {
@@ -15,11 +16,19 @@ export default class Index extends Component {
   render () {
     const items = this.props.campaigns.map(c => ({
       header: c,
-      description: <a>View Campaign</a>,
+      description: (
+        <Link route={`/campaigns/${c}`}>
+          <a>View Campaign</a>
+        </Link>
+      ),
       fluid: true
     }))
     return (<Layout>
-      <Button icon='plus circle' content='Create Campaign' primary floated='right' />
+      <Link route='/campaigns/new'>
+        <a>
+          <Button icon='plus circle' content='Create Campaign' primary floated='right' />
+        </a>
+      </Link>
       <Card.Group items={items} />
     </Layout>)
   }

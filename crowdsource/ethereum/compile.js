@@ -8,7 +8,11 @@ fs.removeSync(buildPath)
 const campaignPath = path.resolve(__dirname, 'contracts', 'Campaign.sol')
 const source = fs.readFileSync(campaignPath, 'utf8')
 
-const output = solc.compile(source, 1).contracts
+const result = solc.compile(source, 1)
+if (result.errors && result.errors.length) {
+  console.error('Errors: ', result.errors)
+}
+const output = result.contracts
 
 fs.ensureDirSync(buildPath)
 

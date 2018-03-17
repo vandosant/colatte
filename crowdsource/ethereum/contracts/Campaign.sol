@@ -1,3 +1,5 @@
+pragma solidity ^0.4.21;
+
 contract CampaignFactory {
     address[] public deployedCampaigns;
 
@@ -57,7 +59,7 @@ contract Campaign {
 
         requests.push(newRequest);
     }
-    
+
     function approveRequest(uint requestIndex) public {
         Request storage request = requests[requestIndex];
 
@@ -75,5 +77,25 @@ contract Campaign {
 
         request.recipient.transfer(request.value);
         request.completed = true;
+    }
+
+    function getSummary() public view returns (
+        uint,
+        uint,
+        uint,
+        uint,
+        address
+    ) {
+      return (
+          minimumContribution,
+          address(this).balance,
+          requests.length,
+          approversCount,
+          manager
+      );
+    }
+
+    function getRequestsCount() public view returns (uint) {
+        return requests.length;
     }
 }
