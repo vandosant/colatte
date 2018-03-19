@@ -50,7 +50,10 @@ export default class CampaignNew extends Component {
     return (
       <Layout>
         <h3>Create a campaign</h3>
-        <Form onSubmit={this.handleSubmit} error={!!this.state.errorMessage}>
+        <Form
+          onSubmit={this.handleSubmit}
+          error={!!this.state.errorMessage}
+        >
           <Form.Field>
             <label>Minimum Contribution</label>
             <Input
